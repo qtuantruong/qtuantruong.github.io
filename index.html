@@ -27,92 +27,96 @@
     <meta property="twitter:image" content="https://qtuantruong.github.io/assets/me.jpg">
 
     <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://api.github.com">
     <link rel="dns-prefetch" href="https://drive.google.com">
     <link rel="dns-prefetch" href="https://dl.acm.org">
+    <link rel="dns-prefetch" href="https://dblp.org">
+    <link rel="dns-prefetch" href="https://scholar.google.com">
 
     <!-- Preload critical resources -->
-    <link rel="preload" href="./assets/style.css?v=1.27" as="style">
     <link rel="preload" href="./assets/me.jpg?v=1.4" as="image">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" as="style">
 
-    <link rel="stylesheet" type="text/css" href="./assets/style.css?v=1.27" media="all">
+    <!-- All CSS inlined for maximum performance - no external requests! -->
+    <style>
+        /* Base styles */
+        * { margin: 0; padding: 0; }
+        body { background: #fff top center no-repeat; font: 88% 'Lato', sans-serif; line-height: 1.6em; }
+        a { color: maroon; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        /* Typography */
+        h1 { font-size: 3.2em; line-height: 1.1em; letter-spacing: 0px; margin: 20px 0 0 0; }
+        h2 { font-size: 2.0em; letter-spacing: 0px; }
+        h3 { font-size: 1.5em; margin: 30px 0 15px 0; letter-spacing: 0px; border-bottom: 1px solid #eee; }
+        h1, h2, h3 { font-weight: 400; line-height: 1.6em; }
+        h3.div { margin-top: 20px; margin-bottom: 20px; }
+        
+        /* Layout */
+        #wrap { width: 980px; margin: 0 auto; }
+        #content { font-size: 1.0em; padding: 40px; }
+        .clear { clear: both; }
+        
+        /* Bio section */
+        #bio::after { content: ""; clear: both; display: block; }
+        .bio-col-1 { width: 75%; float: left; padding-top: 12px; }
+        #contact { margin-top: 5px; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 1px solid #eee; }
+        .bio-col-2 { width: 20%; float: right; margin-top: 20px; }
+        .bio-col-2 img { width: 100%; display: block; margin-left: auto; margin-right: auto; }
+        .bio-col-1 p { text-align: justify; }
+        
+        /* Research section */
+        #research { margin-top: 20px; }
+        .research-col-1 { width: 44%; float: left; margin-top: 10px; margin-right: 40px; }
+        .research-col-1 img { width: 100%; display: block; }
+        .research-col-2 { width: 50%; float: left; margin-top: 5px; margin-bottom: 30px; text-align: justify; }
+        .research-col-2 p#title { margin-bottom: 5px; }
+        .research-col-2 ul { margin-bottom: 15px; }
+        ul.arrow li { list-style-type: ">  "; margin-left: 15px; padding-left: 5px; }
+        
+        /* Publications */
+        .year { margin-bottom: 10px; font-size: 1.2em; }
+        ul#useful li { list-style-type: ">  "; padding-left: 5px; margin: 5px 15px; }
+        ul#papers li { list-style-type: none; padding-left: 10px; margin-bottom: 15px; text-align: justify; }
+        ul#papers li.tuto { border-left: 3px solid Peru; }
+        ul#papers li.conf { border-left: 3px solid Maroon; }
+        ul#papers li.jour { border-left: 3px solid MidnightBlue; }
+        ul#papers li.thesis { border-left: 3px solid DarkSlateGray; }
+        
+        /* Service section */
+        .service { margin-bottom: 10px; }
+        .service .title { margin-bottom: 5px; font-size: 1.2em; }
+        .service .arrow { margin-bottom: 15px; }
+        
+        /* Footer */
+        #lastUpdated { display: block; clear: left; font-size: 1.0em; color: #aaa; margin-top: 50px; border-top: 1px solid #eee; padding-top: 5px; }
+        
+        /* Mobile responsive */
+        @media only screen and (max-width: 600px) {
+            #wrap { width: 100%; }
+            #content { padding: 4%; }
+            #bio { display: flex; flex-direction: column-reverse; }
+            [class*="bio-col-"] { width: 100%; }
+            .bio-col-1 { text-align: center; padding-top: 0; }
+            #contact { text-align: center; }
+            .bio-col-2 { margin-bottom: 10px; }
+            .bio-col-2 img { width: 45%; }
+            [class*="research-col-"] { width: 100%; }
+            .research-col-1 { margin-top: 0px; margin-bottom: 10px; }
+            .research-col-2 { margin-top: 10px; }
+        }
+    </style>
+
+    <!-- Load fonts optimally -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"></noscript>
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <title>Tuan Truong</title>
 
-    <!-- Defer Google Analytics for better performance -->
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
-        var trackEvent = function (url, action, category, label) {
-            gtag('event', action, {
-                'event_category': category,
-                'event_label': label,
-                'transport_type': 'beacon'
-            });
-        }
-
-        // Load Google Analytics after critical content
-        function loadGoogleAnalytics() {
-            var script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-70444606-4';
-            document.head.appendChild(script);
-            
-            script.onload = function() {
-                gtag('js', new Date());
-                gtag('config', 'UA-70444606-4');
-            };
-        }
-
-        // Defer GA loading
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(loadGoogleAnalytics, 1000);
-            });
-        } else {
-            setTimeout(loadGoogleAnalytics, 1000);
-        }
-    </script>
-    <script>
-        function lastUpdate() {
-            var Httpreq = new XMLHttpRequest();
-
-            Httpreq.addEventListener("load", function lastUpdateListener() {
-                var jsonObj = JSON.parse(this.responseText);
-                var date = Date.parse(jsonObj[0].commit.committer.date);
-                const dateTimeFormat = new Intl.DateTimeFormat('en', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: '2-digit'
-                })
-                const [{
-                    value: month
-                }, , {
-                    value: day
-                }, , {
-                    value: year
-                }] = dateTimeFormat.formatToParts(date);
-
-                document.getElementById("lastUpdated").innerHTML = `Last updated in ${month} ${year}`;
-            });
-
-            Httpreq.open("GET", "https://api.github.com/repos/qtuantruong/qtuantruong.github.io/commits?per_page=1");
-            Httpreq.send();
-        }
-
-        // Defer lastUpdate to after critical content loads
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', lastUpdate);
-        } else {
-            lastUpdate();
-        }
-    </script>
 
     <!-- Structured Data / Schema.org -->
     <script type="application/ld+json">
@@ -190,13 +194,23 @@
                     </p>
                 </div>
                 <div class="bio-col-2 image-blurred-edge">
-                    <img src="./assets/me.jpg?v=1.4" alt="Tuan Truong" fetchpriority="high" decoding="async">
+                    <img src="./assets/me.jpg?v=1.4" 
+                         srcset="./assets/me.jpg?v=1.4 1x, ./assets/me.jpg?v=1.4 2x" 
+                         alt="Tuan Truong" 
+                         fetchpriority="high" 
+                         decoding="async">
                 </div>
             </section>
 
             <section id="research">
                 <div class="research-col-1">
-                    <img src="./assets/wc.jpg?v=1.15" alt="Word cloud visualization of research interests and topics" loading="lazy" decoding="async" />
+                    <img data-src="./assets/wc.jpg?v=1.15" 
+                         data-srcset="./assets/wc.jpg?v=1.15 1x, ./assets/wc.jpg?v=1.15 2x"
+                         alt="Word cloud visualization of research interests and topics" 
+                         loading="lazy" 
+                         decoding="async" 
+                         class="lazy-image" 
+                         style="opacity: 0; transition: opacity 0.3s ease;" />
                 </div>
                 <div class="research-col-2">
                     <p id="title"><strong>Research Interests:</strong>
@@ -548,6 +562,191 @@
             <p id="lastUpdated"></p>
         </main>
     </div>
+
+    <!-- Optimized JavaScript - loaded at end for better performance -->
+    <script>
+        // Initialize Google Analytics
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        var trackEvent = function (url, action, category, label) {
+            if (typeof gtag === 'function') {
+                gtag('event', action, {
+                    'event_category': category,
+                    'event_label': label,
+                    'transport_type': 'beacon'
+                });
+            }
+        }
+
+        // Enhanced lastUpdate function with error handling
+        function lastUpdate() {
+            var Httpreq = new XMLHttpRequest();
+            var timeout = setTimeout(function() {
+                Httpreq.abort();
+                console.warn('GitHub API request timed out');
+            }, 5000); // 5 second timeout
+
+            Httpreq.addEventListener("load", function lastUpdateListener() {
+                clearTimeout(timeout);
+                try {
+                    var jsonObj = JSON.parse(this.responseText);
+                    if (jsonObj && jsonObj[0] && jsonObj[0].commit) {
+                        var date = Date.parse(jsonObj[0].commit.committer.date);
+                        const dateTimeFormat = new Intl.DateTimeFormat('en', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: '2-digit'
+                        });
+                        const [{
+                            value: month
+                        }, , {
+                            value: day
+                        }, , {
+                            value: year
+                        }] = dateTimeFormat.formatToParts(date);
+
+                        var lastUpdatedEl = document.getElementById("lastUpdated");
+                        if (lastUpdatedEl) {
+                            lastUpdatedEl.innerHTML = `Last updated in ${month} ${year}`;
+                        }
+                    }
+                } catch (error) {
+                    console.warn('Error parsing GitHub API response:', error);
+                }
+            });
+
+            Httpreq.addEventListener("error", function() {
+                clearTimeout(timeout);
+                console.warn('GitHub API request failed');
+            });
+
+            try {
+                Httpreq.open("GET", "https://api.github.com/repos/qtuantruong/qtuantruong.github.io/commits?per_page=1");
+                Httpreq.send();
+            } catch (error) {
+                clearTimeout(timeout);
+                console.warn('Failed to make GitHub API request:', error);
+            }
+        }
+
+        // Load Google Analytics after critical content with error handling
+        function loadGoogleAnalytics() {
+            try {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-70444606-4';
+                
+                script.onload = function() {
+                    try {
+                        gtag('js', new Date());
+                        gtag('config', 'UA-70444606-4');
+                    } catch (error) {
+                        console.warn('Google Analytics initialization failed:', error);
+                    }
+                };
+                
+                script.onerror = function() {
+                    console.warn('Failed to load Google Analytics script');
+                };
+
+                document.head.appendChild(script);
+            } catch (error) {
+                console.warn('Failed to create Google Analytics script:', error);
+            }
+        }
+
+        // Use requestIdleCallback for non-critical operations when available
+        function scheduleNonCritical(callback, fallbackDelay) {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(callback, { timeout: fallbackDelay });
+            } else {
+                setTimeout(callback, fallbackDelay);
+            }
+        }
+
+        // Enhanced lazy loading with Intersection Observer
+        function initLazyLoading() {
+            const lazyImages = document.querySelectorAll('.lazy-image');
+            
+            if (!lazyImages.length) return;
+
+            // Fallback for browsers without Intersection Observer
+            if (!('IntersectionObserver' in window)) {
+                lazyImages.forEach(function(img) {
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        if (img.dataset.srcset) {
+                            img.srcset = img.dataset.srcset;
+                        }
+                        img.style.opacity = '1';
+                        img.classList.add('loaded');
+                    }
+                });
+                return;
+            }
+
+            const imageObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        
+                        // Create a new image to preload
+                        const imageLoader = new Image();
+                        
+                        imageLoader.onload = function() {
+                            // Image loaded successfully
+                            img.src = img.dataset.src;
+                            if (img.dataset.srcset) {
+                                img.srcset = img.dataset.srcset;
+                            }
+                            img.style.opacity = '1';
+                            img.classList.add('loaded');
+                            observer.unobserve(img);
+                        };
+                        
+                        imageLoader.onerror = function() {
+                            // Handle loading error gracefully
+                            console.warn('Failed to load lazy image:', img.dataset.src);
+                            img.style.opacity = '1'; // Show broken image state
+                            observer.unobserve(img);
+                        };
+                        
+                        // Start loading the image
+                        imageLoader.src = img.dataset.src;
+                    }
+                });
+            }, {
+                // Load images when they're 50px away from viewport
+                rootMargin: '50px 0px',
+                threshold: 0.01
+            });
+
+            lazyImages.forEach(function(img) {
+                imageObserver.observe(img);
+            });
+        }
+
+        // Initialize everything after DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize lazy loading immediately
+                initLazyLoading();
+                // Load critical functions first
+                scheduleNonCritical(lastUpdate, 100);
+                // Load analytics after a delay
+                scheduleNonCritical(loadGoogleAnalytics, 1000);
+            });
+        } else {
+            // DOM already loaded
+            initLazyLoading();
+            scheduleNonCritical(lastUpdate, 100);
+            scheduleNonCritical(loadGoogleAnalytics, 1000);
+        }
+    </script>
 </body>
 
 </html>
