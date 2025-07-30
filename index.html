@@ -29,22 +29,25 @@
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://api.github.com">
+    <link rel="dns-prefetch" href="https://drive.google.com">
+    <link rel="dns-prefetch" href="https://dl.acm.org">
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="./assets/style.css?v=1.27" as="style">
+    <link rel="preload" href="./assets/me.jpg?v=1.4" as="image">
 
     <link rel="stylesheet" type="text/css" href="./assets/style.css?v=1.27" media="all">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 
     <title>Tuan Truong</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-70444606-4"></script>
+    <!-- Defer Google Analytics for better performance -->
     <script>
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
             dataLayer.push(arguments);
         }
-        gtag('js', new Date());
-
-        gtag('config', 'UA-70444606-4');
 
         var trackEvent = function (url, action, category, label) {
             gtag('event', action, {
@@ -52,6 +55,28 @@
                 'event_label': label,
                 'transport_type': 'beacon'
             });
+        }
+
+        // Load Google Analytics after critical content
+        function loadGoogleAnalytics() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-70444606-4';
+            document.head.appendChild(script);
+            
+            script.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'UA-70444606-4');
+            };
+        }
+
+        // Defer GA loading
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                setTimeout(loadGoogleAnalytics, 1000);
+            });
+        } else {
+            setTimeout(loadGoogleAnalytics, 1000);
         }
     </script>
     <script>
@@ -81,9 +106,12 @@
             Httpreq.send();
         }
 
-        window.onload = function () {
+        // Defer lastUpdate to after critical content loads
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', lastUpdate);
+        } else {
             lastUpdate();
-        };
+        }
     </script>
 
     <!-- Structured Data / Schema.org -->
@@ -162,13 +190,13 @@
                     </p>
                 </div>
                 <div class="bio-col-2 image-blurred-edge">
-                    <img src="./assets/me.jpg?v=1.4" alt="Tuan Truong">
+                    <img src="./assets/me.jpg?v=1.4" alt="Tuan Truong" fetchpriority="high" decoding="async">
                 </div>
             </section>
 
             <section id="research">
                 <div class="research-col-1">
-                    <img src="./assets/wc.jpg?v=1.15" alt="Word cloud visualization of research interests and topics" />
+                    <img src="./assets/wc.jpg?v=1.15" alt="Word cloud visualization of research interests and topics" loading="lazy" decoding="async" />
                 </div>
                 <div class="research-col-2">
                     <p id="title"><strong>Research Interests:</strong>
